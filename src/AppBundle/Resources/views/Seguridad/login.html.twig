@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro de Usuarios{% endblock %}
+
+{% block usuario_menu %}active{% endblock %}
+
+{% block body %}
+    <br><br>
+    <h4><ion-icon name="person"></ion-icon> Login</h4>
+    <hr>
+    <form>
+        <div class="form-group">
+            <label >Usuario</label>
+            <input type="text" class="form-control" id="txt_usuario"  placeholder="Escriba el usuario">
+
+        </div>
+
+        <div class="form-group">
+            <label >Clave</label>
+            <input type="password" class="form-control" id="txt_clave"  placeholder="Escriba la clave">
+
+        </div>
+
+        <button type="button" class="btn btn-success"><ion-icon name="log-in"></ion-icon> Iniciar Sesion</button>
+    </form>
+
+{% endblock %}

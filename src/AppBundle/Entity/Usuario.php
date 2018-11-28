@@ -1,8 +1,9 @@
 <?php
 
 namespace AppBundle\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Usuario
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="usuario", uniqueConstraints={@ORM\UniqueConstraint(name="email_idx", columns={"email"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsuarioRepository")
  */
-class Usuario
+class Usuario implements UserInterface, \Serializable
 {
     /**
      * @var int
@@ -27,6 +28,11 @@ class Usuario
      * @ORM\Column(name="nombre", type="string", length=255)
      */
     private $nombre;
+
+    /**
+     * @ORM\Column(type="string", length=25, unique=true)
+     */
+    private $username;
 
     /**
      * @var string
@@ -53,8 +59,26 @@ class Usuario
      * @var bool
      *
      * @ORM\Column(name="habilitado", type="boolean")
+     *
      */
     private $habilitado;
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Solicitud", mappedBy="usuarioSolicitante")
+     */
+
+    private $misSolictudes;
+
+    /**
+     * Usuario constructor.
+     * @param int $id
+     */
+
+    public function __construct()
+    {
+        $this->misSolictudes= new ArrayCollection();
+    }
 
 
     /**
@@ -62,6 +86,7 @@ class Usuario
      *
      * @return int
      */
+
     public function getId()
     {
         return $this->id;
@@ -185,6 +210,101 @@ class Usuario
     public function getHabilitado()
     {
         return $this->habilitado;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsername()
+    {
+        return $this->email ;
+    }
+
+    /**
+     * @param mixed $username
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    /**
+     * String representation of object
+     * @link https://php.net/manual/en/serializable.serialize.php
+     * @return string the string representation of the object or null
+     * @since 5.1.0
+     */
+    public function serialize()
+    {
+        return serialize([
+            $this->id,
+            $this->nombre,
+            $this->email
+        ]);
+        // TODO: Implement serialize() method.
+    }
+
+    /**
+     * Constructs the object
+     * @link https://php.net/manual/en/serializable.unserialize.php
+     * @param string $serialized <p>
+     * The string representation of the object.
+     * </p>
+     * @return void
+     * @since 5.1.0
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->nombre,
+            $this->email
+            ) = $this->unserialize($serialized);
+        // TODO: Implement unserialize() method.
+    }
+
+    /**
+     * Returns the roles granted to the user.
+     *
+     *     public function getRoles()
+     *     {
+     *         return array('ROLE_USER');
+     *     }
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+        return ["USER_ROLE"];
+    }
+
+    /**
+     * Returns the salt that was originally used to encode the password.
+     *
+     * This can return null if the password was not encoded using a salt.
+     *
+     * @return string|null The salt
+     */
+    public function getSalt()
+    {
+        return null;
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
 
