@@ -1,31 +1,38 @@
 <?php
 namespace AppBundle\Controller\Seguridad;
-use AppBundle\Entity\Usuario;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-/**
- * @Route("/login")
- */
-class SeguridadController extends Controller
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+class SeguridadController extends AbstractController
 {
     /**
-     * @Route("/", name="login")
+     * @Route("/login", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function login(AuthenticationUtils $authenticationUtils)
     {
-//        $usuario = new Usuario();
-//        $usuario->setNombre("Juan");
-//        $usuario->setApellido("De los palotes");
-//        $usuario->setEmail("juanp@gmail.com");
-//        $usuario->setPassword("3333");
-//        $usuario->setHabilitado(true);
-//
-//        $manejadorDb = $this->getDoctrine() ->getManager();
-//        $manejadorDb->persist($usuario);
-//        $manejadorDb->flush();
-     //   $usuarios = $this->getDoctrine()->getRepository(Usuario::class)->findAll();
-        // replace this example code with whatever you need
-        return $this->render('@App/Seguridad/login.html.twig');
+       // if ($this->getUser()!=null){
+       //     return $this->redirectToRoute("homepage");
+       // }
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        return $this->render('@App/Seguridad/login.html.twig', array(
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ));
     }
+    /**
+     * @Route("/logout", name="logout")
+     */
+    public function logoutAction(Request $request)
+    {
+        // return $this->redirectToRoute('login');
+    }
+
 }

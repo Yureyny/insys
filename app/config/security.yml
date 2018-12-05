@@ -10,8 +10,8 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+#        in_memory:
+#            memory: ~
         db:
             entity:
                 class: AppBundle:Usuario
@@ -24,10 +24,17 @@ security:
             security: false
 
         main:
-#            anonymous: ~
-            pattern:    ^/
-            http_basic: ~
-            provider: db
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: /logout
+                target: /login
+
+       #     pattern:    ^/
+       #     http_basic: ~
+       #     provider: db
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate

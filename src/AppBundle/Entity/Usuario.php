@@ -29,10 +29,6 @@ class Usuario implements UserInterface, \Serializable
      */
     private $nombre;
 
-    /**
-     * @ORM\Column(type="string", length=25, unique=true)
-     */
-    private $username;
 
     /**
      * @var string
@@ -217,16 +213,9 @@ class Usuario implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        return $this->email ;
+        return $this->email;
     }
 
-    /**
-     * @param mixed $username
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-    }
 
     /**
      * String representation of object
@@ -259,7 +248,7 @@ class Usuario implements UserInterface, \Serializable
             $this->id,
             $this->nombre,
             $this->email
-            ) = $this->unserialize($serialized);
+            ) = unserialize($serialized,['allowed_classes' => false]);
         // TODO: Implement unserialize() method.
     }
 

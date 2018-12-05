@@ -19,11 +19,12 @@ class UsuarioController extends Controller
     {
         // 1) build the form
         $usuario = new Usuario();
-        $form = $this->createForm(UsuarioType::class, $usuario);
+        $form = $this->createForm( UsuarioType::class, $usuario);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+//            dump($usuario); die;
             $password = $passwordEncoder->encodePassword($usuario, $usuario->getPassword());
             $usuario->setPassword($password);
             $usuario->setHabilitado(true);

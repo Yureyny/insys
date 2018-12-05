@@ -8,20 +8,25 @@
     <br><br>
     <h4><ion-icon name="person"></ion-icon> Login</h4>
     <hr>
-    <form>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="POST">
         <div class="form-group">
-            <label >Usuario</label>
-            <input type="text" class="form-control" id="txt_usuario"  placeholder="Escriba el usuario">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Escriba el email">
 
         </div>
-
         <div class="form-group">
-            <label >Clave</label>
-            <input type="password" class="form-control" id="txt_clave"  placeholder="Escriba la clave">
-
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" name="_password" placeholder="Escriba la clave">
         </div>
 
-        <button type="button" class="btn btn-success"><ion-icon name="log-in"></ion-icon> Iniciar Sesion</button>
+        <button type="submit" class="btn btn-success"><ion-icon name="log-in"></ion-icon> Iniciar Sesion</button>
+        <button type="button" class="btn btn-info"><ion-icon name="person-add"></ion-icon> Registrarse</button>
     </form>
 
 {% endblock %}
