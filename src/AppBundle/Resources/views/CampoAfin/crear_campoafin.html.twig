@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html.twig' %}
+
+{% block title %}Mantenimiento Campo a fin{% endblock %}
+
+
+
+{% block body %}
+  <br><br>
+  <h4><ion-icon name="person"></ion-icon> Registro de Campo a fin</h4>
+  <hr>
+  <div class="container">
+
+      {{ form_start(form,{ 'attr':{'class':''}}) }}
+    <div class="panel panel-default">
+      <div class="panel-heading"><label></label></div>
+      <div class="panel-body">
+          {{ form_widget(form) }}
+
+        <div class="pull-right">
+          <button type="submit" class="btn btn-success"><ion-icon name="save"></ion-icon> <b>Guardar</b></button>
+        </div>
+      </div>
+    </div>
+      {{ form_end(form) }}
+  </div>
+{% endblock %}

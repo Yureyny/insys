@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Controller\Usuario;
+use AppBundle\Entity\CampoAfin;
 use AppBundle\Entity\Usuario;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,4 +39,31 @@ class UsuarioController extends Controller
             'form'=>$form->createView()
         ]);
     }
+//Para el editar
+//    /**
+//     * @Route("/{id}", name="usuario")
+//     */
+//    public function editarCampoAfin(Request $request, CampoAfin $compoAfin)
+//    {
+//        // 1) build the form
+//
+//        $form = $this->createForm( UsuarioType::class, $compoAfin);
+//
+//        $form->handleRequest($request);
+//        if($form->isSubmitted() && $form->isValid())
+//        {
+////            dump($usuario); die;
+//            $password = $passwordEncoder->encodePassword($usuario, $usuario->getPassword());
+//            $usuario->setPassword($password);
+//            $usuario->setHabilitado(true);
+//            $em=$this->getDoctrine()->getManager();
+//           // $em->persist($usuario);
+//            $em->flush();
+//            return $this->redirectToRoute('login');
+//        }
+//
+//        return $this->render('@App/Usuario/registro_usuario.html.twig', [
+//            'form'=>$form->createView()
+//        ]);
+//    }
 }
