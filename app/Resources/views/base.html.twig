@@ -36,6 +36,11 @@
                     {% if app.user != null %}
                         <li class="nav-item {% block campo_menu %}{% endblock %}">
                             <a class="nav-link" href="{{ path('campoAfin') }}">Campo a Fines <span class="sr-only"></span></a>
+
+                        </li>
+                        <li class="nav-item {% block estado_menu %}{% endblock %}">
+                            <a class="nav-link" href="{{ path('estado') }}">Estado <span class="sr-only"></span></a>
+
                         </li>
                     {% else %}
                         <li class="nav-item {% block ayuda_menu %}{% endblock %}">
